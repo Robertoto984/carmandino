@@ -22,12 +22,12 @@ class StoreMaintenanceOrderRequest extends FormRequest
             'driver_id.*' => 'required',
             'notes.*' => 'nullable',
             'odometer_number.*' => 'required',
-            'total.*' => 'required',
-            
+            'total.*' => 'nullable',
+
             'procedure_id.*' => 'required',
             'product_id.*' => 'required',
             'unit_price.*' => 'required',
-            'total_price.*' => 'required',
+            'total_price.*' => 'nullable',
             'quantity.*' => 'required',
         ];
     }

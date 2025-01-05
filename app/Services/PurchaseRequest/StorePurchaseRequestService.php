@@ -26,17 +26,24 @@ class StorePurchaseRequestService
 
             if (isset($orders['required_parts']) && is_array($orders['required_parts'])) {
                 foreach ($orders['required_parts'] as $prod) {
+                    $total_price = $orders['quantity'][$key] * $orders['price'][$key];
                     DB::table('purchase_request_product')->insert([
                         'request_id' => $row->id,
                         'required_parts' => $orders['required_parts'][$key],
                         'quantity' => $orders['quantity'][$key],
                         'price' => $orders['price'][$key],
-                        'total_price' => $orders['total_price'][$key],
+                        'total_price' => $total_price,
                         'description' => $orders['description'][$key],
                         'product_responsible' => $orders['product_responsible'][$key],
                         'created_at' => Carbon::now(),
                     ]);
                 }
+
+                $row->total = $row->calculateTotal($row->id);
+
+                DB::table('purchase_requests')
+                    ->where('id', $row->id)
+                    ->update(['total' => $row->total]);
             }
 
             DB::commit();

@@ -10,7 +10,7 @@
 <div class="col ml-auto">
     <div class="dropdown float-right">
         <a href="{{route('purchase_requests.create')}}" class="btn btn-primary rounded-btn ml-10"> + إضافة طلب</a>
-        <a id="bulkDeleteBtn" href="" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
+        <a id="bulkDeleteBtn" href="{{ route('purchase_requests.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
         <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
         <div class="dropdown-menu" aria-labelledby="actionMenuButton">
                <a class="dropdown-item more" href=""><i class="fa fa-download mr-2"></i>تصدير</a>
@@ -74,7 +74,7 @@
                                         <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{route('purchase_requests.edit',$ord->id)}}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i> 
                                         </a>
-                                        <a href="" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="">
+                                        <a href="{{route('purchase_requests.delete',$ord->id)}}" title="حذف" id="destroy" class="btn btn-danger btn-sm delete-driver" data-id="">
                                             <i class="fa fa-trash"></i> 
                                         </a>
                                     </td>

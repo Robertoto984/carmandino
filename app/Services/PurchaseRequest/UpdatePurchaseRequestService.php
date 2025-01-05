@@ -13,39 +13,45 @@ class UpdatePurchaseRequestService
     {
         DB::beginTransaction();
         try {
+
             $purchaseRequest = PurchaseRequest::findOrFail($id);
 
-            if ($purchaseRequest) {
-                $purchaseRequest->update([
-                    'number' => $orders['number'],
-                    'date' => $orders['date'],
-                    'reference' => $orders['reference'],
-                    'responsible' => $orders['responsible'],
-                    'purchase_justifications' => $orders['purchase_justifications'],
-                    'total' => isset($orders['total']) ? $orders['total'] : '',
-                    'notes' => $orders['notes'],
-                ]);
+
+            if (!$purchaseRequest) {
+                Log::error('PurchaseRequest with ID ' . $id . ' not found.');
+                return response()->json(['error' => 'PurchaseRequest not found'], 404);
             }
 
-            if (
-                isset($orders['required_parts']) && is_array($orders['required_parts'])
-            ) {
-                DB::table('purchase_request_product')->where('request_id', $purchaseRequest->id)->delete();
+            $purchaseRequest->update([
+                'number' => $orders['number'],
+                'date' => $orders['date'],
+                'reference' => $orders['reference'],
+                'responsible' => $orders['responsible'],
+                'purchase_justifications' => $orders['purchase_justifications'],
+                'total' => $orders['total'],
+                'notes' => $orders['notes'],
+            ]);
 
-                foreach ($orders['required_parts'] as $key => $prod) {
-                    $total_price = $orders['quantity'][$key] * $orders['price'][$key];
-                    DB::table('purchase_request_product')->updateOrInsert([
+            if (isset($orders['required_parts']) && is_array($orders['required_parts'])) {
+                DB::table('purchase_request_product')->where('request_id', $purchaseRequest->id)->delete();
+                foreach ($orders['required_parts'] as $k => $prod) {
+                    $total_price = $orders['quantity'][$k] * $orders['price'][$k];
+
+                    DB::table('purchase_request_product')->insert([
                         'request_id' => $purchaseRequest->id,
-                        'required_parts' => $orders['required_parts'][$key]
-                    ], [
-                        'quantity' => $orders['quantity'][$key],
-                        'price' => $orders['price'][$key],
+                        'required_parts' => $prod,
+                        'quantity' => $orders['quantity'][$k],
+                        'price' => $orders['price'][$k],
+                        'description' => $orders['description'][$k],
+                        'product_responsible' => $orders['product_responsible'][$k],
                         'total_price' => $total_price,
-                        'description' => $orders['description'][$key],
-                        'product_responsible' => $orders['product_responsible'][$key],
-                        'created_at' => Carbon::now(),
                     ]);
                 }
+                $purchaseRequest->total = $purchaseRequest->calculateTotal($purchaseRequest->id);
+
+                DB::table('purchase_requests')
+                    ->where('id', $purchaseRequest->id)
+                    ->update(['total' => $purchaseRequest->total]);
             }
 
             DB::commit();

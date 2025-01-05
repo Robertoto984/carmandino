@@ -177,4 +177,6 @@ Route::prefix('purchase-request')->controller(PurchaseRequestController::class)-
     Route::post('store', 'store')->name('purchase_requests.store');
     Route::get('edit/{id}', 'edit')->name('purchase_requests.edit');
     Route::post('update/{id}', 'update')->name('purchase_requests.update');
+    Route::delete('delete/{id}', 'destroy')->name('purchase_requests.delete');
+    Route::delete('bulk-delete', 'MultiDelete')->name('purchase_requests.bulk-delete');
 });
