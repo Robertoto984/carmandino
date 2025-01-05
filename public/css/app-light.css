@@ -3019,7 +3019,9 @@ input[type="button"].btn-block {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem; }
+  padding: 0.5rem 1rem;
+  float: left;
+ }
   .navbar .container,
   .navbar .container-fluid, .navbar .container-sm, .navbar .container-md, .navbar .container-lg, .navbar .container-xl {
     display: flex;
@@ -12233,7 +12235,8 @@ html {
   .rtl.vertical .main-content, .rtl.vertical.hover .topnav,
   .rtl.vertical.hover .main-content {
     margin-left: 0;
-    margin-right: 16rem; }
+    /* margin-right: 16rem; */
+   }
   .rtl .vertnav .badge {
     float: left; }
   .rtl .vertnav .dropdown-toggle::after {
