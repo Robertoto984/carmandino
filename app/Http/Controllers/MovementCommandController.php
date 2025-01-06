@@ -35,6 +35,9 @@ class MovementCommandController extends Controller
     }
     public function index()
     {
+        if (request()->user()->cannot('index', MovementCommand::class)) {
+            abort(403);
+        }
         $commands = MovementCommand::with(['driver', 'truck', 'escort'])
             ->paginate();
         return view('commands.index', compact('commands'));
@@ -42,6 +45,9 @@ class MovementCommandController extends Controller
 
     public function create()
     {
+        if (request()->user()->cannot('create', MovementCommand::class)) {
+            abort(403);
+        }
         $trucks = Truck::select('id', 'plate_number')->get();
         $escorts = Escort::select('first_name', 'last_name', 'id')->get();
         $drivers = Driver::select('first_name', 'last_name', 'id')->get();
@@ -52,6 +58,9 @@ class MovementCommandController extends Controller
 
     public function store(MovementCommandRequest $request)
     {
+        if (request()->user()->cannot('create', MovementCommand::class)) {
+            abort(403);
+        }
         Log::info('request', $request->all());
         try {
             if (request()->user()->cannot('create', MovementCommand::class)) {

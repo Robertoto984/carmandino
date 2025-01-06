@@ -1,24 +1,26 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="col">
-    <h2 class="mb-2 page-title">طلبات الصيانة</h2>
-</div>
-
-<div class="col ml-auto">
-    <div class="dropdown float-right">
-         @can('create',\App\Models\MaintenanceRequest::class)
-            <a href="{{route('maintenance_orders.create')}}" class="btn rounded-btn btn-primary">+ طلب صيانة</a>
-             @endcan
-          @can('MultiDelete',\App\Models\MaintenanceRequest::class)
-            <a id="bulkDeleteBtn" href="{{ route('maintenance_orders.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد </a>
-             @endcan
-        <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            المزيد
-        </button>
-        <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-            <a class="dropdown-item more" href="{{ route('maintenance_orders.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
-            <a class="dropdown-item more" href="{{ route('maintenance_orders.import_form') }}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+<div class="row">
+    <div class="col">
+        <h2 class="mb-2 page-title">طلبات الصيانة</h2>
+    </div>
+    
+    <div class="col ml-auto">
+        <div class="dropdown float-right">
+             @can('create',\App\Models\MaintenanceRequest::class)
+                <a href="{{route('maintenance_orders.create')}}" class="btn rounded-btn btn-primary" id="create">+ طلب صيانة</a>
+                 @endcan
+              @can('MultiDelete',\App\Models\MaintenanceRequest::class)
+                <a id="bulkDeleteBtn" href="{{ route('maintenance_orders.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد </a>
+                 @endcan
+            <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                المزيد
+            </button>
+            <div class="dropdown-menu" aria-labelledby="actionMenuButton">
+                <a class="dropdown-item more" href="{{ route('maintenance_orders.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
+                <a class="dropdown-item more" href="{{ route('maintenance_orders.import_form') }}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+            </div>
         </div>
     </div>
 </div>
