@@ -2,27 +2,29 @@
 
 @section('content')
 
-<div class="col">
-    <h2 class="mb-2 page-title">قائمة المرافقين</h2>
-</div>
-
-<div class="col ml-auto">
-    <div class="dropdown float-right">
-        @can('create',\App\Models\Escort::class)
-
-        <a href="{{ route('escorts.create') }}" class="btn rounded-btn btn-primary">+ بطاقة مرافق</a>
-        @endcan
-        @can('MultiDelete',\App\Models\Escort::class)
-
-        <a id="bulkDeleteBtn" href="{{ route('escorts.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">
-            حذف المحدد
-        </a>
-        @endcan
-        <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
-        <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-            <a class="dropdown-item more" href="{{ route('escorts.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
-            <a class="dropdown-item more" href="{{route('escorts.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+<div class="row">
+    <div class="col">
+        <h2 class="mb-2 page-title">قائمة المرافقين</h2>
+    </div>
+    
+    <div class="col ml-auto">
+        <div class="dropdown float-right">
+            @can('create',\App\Models\Escort::class)
+    
+            <a href="{{ route('escorts.create') }}" class="btn rounded-btn btn-primary" id="create">+ بطاقة مرافق</a>
+            @endcan
+            @can('MultiDelete',\App\Models\Escort::class)
+    
+            <a id="bulkDeleteBtn" href="{{ route('escorts.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">
+                حذف المحدد
+            </a>
+            @endcan
+            <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
+            <div class="dropdown-menu" aria-labelledby="actionMenuButton">
+                <a class="dropdown-item more" href="{{ route('escorts.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
+                <a class="dropdown-item more" href="{{route('escorts.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+            </div>
         </div>
     </div>
 </div>

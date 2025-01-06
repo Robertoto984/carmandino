@@ -253,5 +253,32 @@
     <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var title = $('.page-title').text()
+        $('#title').text(title)
+        var previousPage = localStorage.getItem('previousPage');
+        var prev = localStorage.getItem('prev_link')
+        if(previousPage){
+          $('#prev_link').text(previousPage)
+          $('#prev_title').css('display','block')
+          $('#prev_link').attr('href',prev)
+        }
+    </script>
 
+    <script>
+      
+      $('#create').on('click',function(){
+        var text = $('.page-title').text()// Get class of a specific element
+        localStorage.setItem('previousPage', text); // Save it in localStorage
+        var prev_link = window.location.href
+        localStorage.setItem('prev_link', prev_link); // Save it in localStorage
+
+      })
+    </script>
+    <script>
+      $('.current_link').on('click',function(){
+        localStorage.clear();
+
+      })
+    </script>
     <script src="{{ asset('js/ajax.js') }}"></script>

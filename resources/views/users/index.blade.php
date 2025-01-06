@@ -3,24 +3,26 @@
 
 @section('content')
 
-<div class="col">
-    <h2 class="mb-2 page-title">قائمة المستخدمين</h2>
-</div>
-
-<div class="col ml-auto">
-    <div class="dropdown float-right">
-        @can('create',\App\Models\User::class)
-
-        <a href="{{ route('users.create') }}" class="btn btn-primary rounded-btn ml-10"> + بطاقة مستخدم</a>
-        @endcan
-        @can('MultiDelete',\App\Models\User::class)
-
-        <a id="bulkDeleteBtn" href="{{ route('users.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
-        @endcan
-        <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
-        <div class="dropdown-menu" aria-labelledby="actionMenuButton">
-               <a class="dropdown-item more" href="{{ route('users.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
-            <a class="dropdown-item more" href="{{route('users.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+<div class="row">
+    <div class="col">
+        <h2 class="mb-2 page-title">قائمة المستخدمين</h2>
+    </div>
+    
+    <div class="col ml-auto">
+        <div class="dropdown float-right">
+            @can('create',\App\Models\User::class)
+    
+            <a href="{{ route('users.create') }}" class="btn btn-primary rounded-btn ml-10" id="create"> + بطاقة مستخدم</a>
+            @endcan
+            @can('MultiDelete',\App\Models\User::class)
+    
+            <a id="bulkDeleteBtn" href="{{ route('users.bulk-delete') }}" class="btn rounded-btn btn-danger ml-auto">حذف المحدد</a>
+            @endcan
+            <button class="btn rounded-btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> المزيد </button>
+            <div class="dropdown-menu" aria-labelledby="actionMenuButton">
+                   <a class="dropdown-item more" href="{{ route('users.export') }}"><i class="fa fa-download mr-2"></i>تصدير</a>
+                <a class="dropdown-item more" href="{{route('users.import_form')}}" data-toggle="modal" data-target="#exampleModal" id="modal"><i class="fa-solid fa-file-import mr-2" ></i>استيراد</a>
+            </div>
         </div>
     </div>
 </div>

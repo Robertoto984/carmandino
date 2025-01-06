@@ -20,9 +20,21 @@
 
     <main role="main" class="main-content">
       <div class="container-fluid">
-        <div class="row d-flex justify-content-center align-items-center" style="gap:30px;margin-top:50px;">
+          <div class="row">
+            <div style="  margin: 0 auto;
+    width: 80%;gap:30px;margin-top:50px;">
+    @if(request()->segment(1) != 'dashboard')
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item current_link" ><a href="{{ route('dashboard') }}">الرئيسية</a></li>
+        <li class="breadcrumb-item current_link" id="prev_title" style="display: none"><a href="" id="prev_link"></a></li>
+        <li class="breadcrumb-item active" aria-current="page" id="title"></li>
+      </ol>
+    </nav> 
+    @endif
           @yield('content')
           @include('modal')
+            </div>
         </div>
       </div>
     </main>
