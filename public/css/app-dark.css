@@ -2358,7 +2358,7 @@ input[type="button"].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #ced4da;
+  color: #474a4c;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -9294,7 +9294,7 @@ h1, h2, h3, h4, h5, h6, strong {
   color: #dee2e6; }
 
 .text-muted {
-  color: #adb5bd !important; }
+  color: #fff !important; }
 
 /* force bg-white on dark mode */
 .bg-white {
@@ -12236,7 +12236,8 @@ html {
   .rtl.vertical .main-content, .rtl.vertical.hover .topnav,
   .rtl.vertical.hover .main-content {
     margin-left: 0;
-    margin-right: 16rem; }
+    /* margin-right: 16rem; */
+   }
   .rtl .vertnav .badge {
     float: left; }
   .rtl .vertnav .dropdown-toggle::after {

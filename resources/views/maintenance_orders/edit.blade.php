@@ -127,7 +127,7 @@
                                 value="{{ $product->pivot->total_price ?? '' }}" placeholder="الإجمالي">
                         </div>
                         <div class="col-md-1">
-                            <a href="" title="حذف" class="btn btn-danger btn-sm delete-driver" id="remove">
+                            <a href="" title="حذف" class="btn btn-danger btn-sm delete-driver justify-content-center d-flex align-items-center" id="remove">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </div>
@@ -137,7 +137,7 @@
                 @endforeach
                
             </div>
-            <a style="margin: 10px" href="" title="اضافة" class="btn btn-primary btn-sm " id="add">
+            <a style="margin: 10px" href="" title="اضافة" class="btn btn-primary btn-sm justify-content-center d-flex align-items-center" id="add">
                 <i class="fa fa-plus"></i>
             </a>
             <div class="row">
@@ -162,41 +162,4 @@
     </div>
 </form>
 
-<script>
-    let count=0;
-    $('body').on('click','#add',function(e){
-        e.preventDefault()
-        var lastRepeatingGroup = $('#card-order').last();
-  var after= lastRepeatingGroup.clone().insertAfter(lastRepeatingGroup);
-  $(after).find('input').val('')
-  $(after).find('select option:selected').removeAttr('selected');
-       
-       reorderForms1()
-    count++
-    })
-  
-let order_number1 = $('#procedure_number:first').val();
-function reorderForms1() {
-    // Reorder the number inputs after deletion
-    let value = order_number1;
-    let number = Number(value);
-   $.each($(document).find('.card-order'), function() {
-    
-
-        $(this).find('#procedure_number').val(`${number}`);
-        number ++;
-   });
-
-}
-
-$('body').on('click','#remove',function(e){
-    e.preventDefault()
-    $(this).closest('.card-order').remove()
-   if($('body').find('.card-order').length == 0){
-    $('#card-order').css('disple','none')
-
-   }
-    reorderForms1()
-
-})
-</script>
+<script src="{{ asset('js/form-repeater.js') }}"></script>

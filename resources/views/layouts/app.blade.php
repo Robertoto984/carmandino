@@ -21,8 +21,8 @@
     <main role="main" class="main-content">
       <div class="container-fluid">
           <div class="row">
-            <div style="  margin: 0 auto;
-    width: 80%;gap:30px;margin-top:50px;">
+            <div style="width:90%;  margin: 0 auto;
+   gap:30px;">
     @if(request()->segment(1) != 'dashboard')
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">

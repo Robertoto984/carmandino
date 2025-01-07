@@ -102,12 +102,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-order" onkeyup="createDive()" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
+                        <div id="card-order"   style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
+                            <div class="card-order" >
+
                             <div class="row" style="margin: 10px">
                                 <div class="form-group col-md-1 mb-3">
-                                    <input class="form-control" id="" name="[]" value="1" placeholder="الرقم" autocomplete="true" readonly>
-
-                                    <span class="text-danger" id="-error"></span>
+                                             <input type="text" name="procedure_number[]" id="procedure_number" class="form-control" value="1"
+                                             readonly>
                                 </div>
                                 <div class="form-group col-md-2 mb-3">
                                     <select class="form-control" id="procedure_id" name="procedure_id[]">
@@ -140,6 +141,13 @@
                                     <input type="number" class="form-control" id="total_price" name="total_price[]" placeholder="الإجمالي" autocomplete="true">
                                     <span class="text-danger" id="total_price-error"></span>
                                 </div>
+                                <a style="margin-bottom:15px" title="اضافة" class="btn btn-primary btn-sm justify-content-center d-flex align-items-center" id="add">
+                                    <i class="fa fa-plus" style="color: #fff"></i>
+                                </a>
+                                <a style="margin-bottom:15px" href="" title="حذف" class="btn btn-danger btn-sm delete-driver justify-content-center d-flex align-items-center" id="remove">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
                             </div>
                         </div>
                         <div class="row">

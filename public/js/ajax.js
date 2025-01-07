@@ -217,3 +217,30 @@ $(document).on('submit','form.form-login',function(e){
     });
 })
 
+//breadcrumb
+$(document).ready(function(){
+    var title = $('.page-title').text()
+    $('#title').text(title)
+    var previousPage = localStorage.getItem('previousPage');
+    var prev = localStorage.getItem('prev_link')
+    if(previousPage){
+      $('#prev_link').text(previousPage)
+      $('#prev_title').css('display','block')
+      $('#prev_link').attr('href',prev)
+    }
+})
+
+$('#create').on('click',function(){
+var text = $('.page-title').text()// Get class of a specific element
+localStorage.setItem('previousPage', text); // Save it in localStorage
+var prev_link = window.location.href
+localStorage.setItem('prev_link', prev_link); // Save it in localStorage
+
+})
+
+$('.current_link').on('click',function(){
+localStorage.clear();
+
+})
+
+//end breadcrumb

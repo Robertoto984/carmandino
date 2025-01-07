@@ -59,17 +59,18 @@
                                 <input type="text" name="responsible[]" id="responsible" class="form-control">
                                 <span class="text-danger" id="responsible-error"></span>
                             </div>
-                            <div class="card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
+                            <div id="card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
+                                <div class="card-order">
                                 <div class="row" style="margin: 10px">
                                     <div class="form-group col-md-1 mb-3">
-                                        <input class="form-control" id="" name="[]" value="1" placeholder="الرقم" autocomplete="true">
+                                        <input class="form-control" id="procedure_number" name="[]" value="1" placeholder="الرقم" autocomplete="true">
                                         <span class="text-danger" id="-error"></span>
                                     </div>
-                                    <div class="col-md-6 form-group mb-3">
+                                    <div class="col-md-2 form-group mb-3">
                                         <input type="text" name="required_parts[]" placeholder="القطعة المطلوبة" id="required_parts" class="form-control">
                                         <span class="text-danger" id="required_parts-error"></span>
                                     </div>
-                                    <div class="form-group col-md-2 mb-3">
+                                    <div class="form-group col-md-1 mb-3">
                                         <input class="form-control" id="quantity" name="quantity[]" placeholder="الكمية" autocomplete="true">
 
                                         <span class="text-danger" id="quantity-error"></span>
@@ -78,7 +79,7 @@
                                         <input class="form-control" id="price" name="price[]" placeholder="السعر" autocomplete="true">
                                         <span class="text-danger" id="price-error"></span>
                                     </div>
-                                    <div class="form-group col-md-2 mb-3">
+                                    <div class="form-group col-md-1 mb-3">
                                         <input class="form-control" id="total_price" name="total_price[]" placeholder="الإجمالي" autocomplete="true">
                                         <span class="text-danger" id="total_price-error"></span>
                                     </div>
@@ -90,8 +91,14 @@
                                         <input class="form-control" id="product_responsible" name="product_responsible[]" placeholder="الجهة الطالبة" autocomplete="true">
                                         <span class="text-danger" id="product_responsible-error"></span>
                                     </div>
+                                    <a style="margin-bottom:15px" title="اضافة" class="btn btn-primary btn-sm justify-content-center d-flex align-items-center" id="add">
+                                        <i class="fa fa-plus" style="color: #fff"></i>
+                                    </a>
+                                    <a style="margin-bottom:15px" href="" title="حذف" class="btn btn-danger btn-sm delete-driver justify-content-center d-flex align-items-center" id="remove">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
                                 </div>
-                                <button type="button" id="add-new"></button>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
