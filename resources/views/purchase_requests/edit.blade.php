@@ -40,54 +40,47 @@
                 @foreach ($products as $product)
                 <div id="card-order" style="background-color: rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.125);">
                     <div class="card-order">
-                        <div class="row" style="margin: 10px">
+                        <div class="row" style="margin: 10px;">
                             <div class="form-group col-md-1 mb-3">
-                                <input class="form-control" name="[]" value="{{ $loop->index + 1 }}" placeholder="الرقم"
-                                    autocomplete="true">
+                                <input class="form-control" name="[]" id="procedure_number" value="{{ $loop->index + 1 }}" placeholder="الرقم" autocomplete="true">
                                 <span class="text-danger" id="-error"></span>
                             </div>
-                            <div class="col-md-6 form-group mb-3">
-                                <input type="text" name="required_parts[]" placeholder="القطعة المطلوبة"
-                                    value="{{ $product->required_parts }}" id="required_parts" class="form-control">
+                            <div class="form-group col-md-2 mb-3">
+                                <input type="text" name="required_parts[]" placeholder="القطعة المطلوبة" value="{{ $product->required_parts }}" id="required_parts" class="form-control">
                                 <span class="text-danger" id="required_parts-error"></span>
                             </div>
-                            <div class="form-group col-md-2 mb-3">
-                                <input class="form-control" name="quantity[]" value="{{ $product->quantity }}"
-                                    placeholder="الكمية" autocomplete="true">
+                            <div class="form-group col-md-1 mb-3">
+                                <input class="form-control" name="quantity[]" value="{{ $product->quantity }}" placeholder="الكمية" autocomplete="true">
                                 <span class="text-danger" id="quantity-error"></span>
                             </div>
                             <div class="form-group col-md-2 mb-3">
-                                <input class="form-control" name="price[]" value="{{ $product->price }}"
-                                    placeholder="السعر" autocomplete="true">
+                                <input class="form-control" name="price[]" value="{{ $product->price }}" placeholder="السعر" autocomplete="true">
                                 <span class="text-danger" id="price-error"></span>
                             </div>
                             <div class="form-group col-md-2 mb-3">
-                                <input class="form-control" name="total_price[]" value="{{ $product->total_price }}"
-                                    placeholder="الإجمالي" autocomplete="true">
+                                <input class="form-control" name="total_price[]" value="{{ $product->total_price }}" placeholder="الإجمالي" autocomplete="true">
                                 <span class="text-danger" id="total_price-error"></span>
                             </div>
                             <div class="form-group col-md-2 mb-3">
-                                <input class="form-control" name="description[]" value="{{ $product->description }}"
-                                    placeholder="الوصف" autocomplete="true">
+                                <input class="form-control" name="description[]" value="{{ $product->description }}" placeholder="الوصف" autocomplete="true">
                                 <span class="text-danger" id="description-error"></span>
                             </div>
                             <div class="form-group col-md-2 mb-3">
-                                <input class="form-control" name="product_responsible[]"
-                                    value="{{ $product->product_responsible }}" placeholder="الجهة الطالبة"
-                                    autocomplete="true">
+                                <input class="form-control" name="product_responsible[]" value="{{ $product->product_responsible }}" placeholder="الجهة الطالبة" autocomplete="true">
                                 <span class="text-danger" id="product_responsible-error"></span>
                             </div>
-                            <a style="margin-bottom:15px" title="اضافة" class="btn btn-primary btn-sm justify-content-center d-flex align-items-center" id="add">
-                                <i class="fa fa-plus" style="color: #fff"></i>
-                            </a>
+                           
                             <a style="margin-bottom:15px" href="" title="حذف" class="btn btn-danger btn-sm delete-driver justify-content-center d-flex align-items-center" id="remove">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </div>
                     </div>
                 </div>
+               
                 @endforeach
-
+  <a style="margin: 10px" href="" title="اضافة" class="btn btn-primary btn-sm justify-content-center d-flex align-items-center" id="add">
+                <i class="fa fa-plus"></i>
+            </a>
             </div>
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
@@ -116,3 +109,4 @@
     </div>
 </form>
 <script src="{{ asset('js/form-repeater.js') }}"></script>
+

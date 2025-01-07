@@ -94,7 +94,7 @@ function checkDeleteButtonVisibility() {
 
 $('body').on('click','#add',function(e){
     e.preventDefault()
-    var lastRepeatingGroup = $('#card-order').last();
+    var lastRepeatingGroup = $('.card-order').last();
 var after= lastRepeatingGroup.clone().insertAfter(lastRepeatingGroup);
 $(after).find('input').not("#procedure_number").val('')
 $(after).find('select option:selected').removeAttr('selected');
