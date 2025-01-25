@@ -51,27 +51,14 @@
                                     <th><input type="checkbox"  class="checkbox"  id='check_all'/></th>
                                     <th>#</th>
                                     <th>النوع</th>
-                                    <th>الصانع</th>
                                     <th>رقم اللوحة</th>
                                     <th>السائق</th>
                                     <th>تاريخ الاستلام</th>
                                     <th>تاريخ التسليم</th>
-                                    <th>تاريخ الترسيم</th>
-                                    <th>السنة</th>
-                                    <th>التسجيل</th>
-                                    <th>الموديل</th>
-                                    <th>رقم الشاسيه</th>
-                                    <th>رقم المحرك</th>
-                                    <th>رقم رخصة السير</th>
                                     <th>اللون</th>
-                                    <th>نوع الوقود</th>
                                     <th>عدد الركاب</th>
-                                    <th>الوزن القائم</th>
-                                    <th>الوزن الفارغ</th>
                                     <th>الحمولة</th>
                                     <th>رقم العداد</th>
-                                    <th>الحالة الفنية</th>
-                                    <th>الحالة القانونية</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -81,33 +68,23 @@
                                         <td><input type="checkbox" name="ids[]" value="{{ $card->id }}" id="check"/></td>
                                         <td>{{$card->id}}</td>
                                         <td>{{$card->truck->type}}</td>
-                                        <td>{{$card->truck->manufacturer}}</td>
                                         <td>{{$card->truck->plate_number}}</td>
-                                        <td>{{$card->driver->first_name. ' '.$card->driver->last_name }}</td>
+                                        <td>
+                                            @if($card->driver)
+                                                {{ $card->driver->first_name }} {{ $card->driver->last_name }}
+                                            @else
+                                                <span>غير متوفر</span> <!-- "Not available" in Arabic -->
+                                            @endif
+                                        </td>
                                         <td>{{$card->receipt_date}}</td>
                                         <td>{{$card->deliver_date}}</td>
-                                        <td>{{$card->truck->demarcation_date}}</td>
-                                        <td>{{$card->truck->year}}</td>
-                                        <td>{{$card->truck->register}}</td>
-                                        <td>{{$card->truck->model}}</td>
-                                        <td>{{$card->truck->chassis_number}}</td>
-                                        <td>{{$card->truck->engine_number}}</td>
-                                        <td>{{$card->truck->traffic_license_number}}</td>
                                         <td>{{$card->truck->color}}</td>
-                                        <td>{{$card->truck->fuel_type}}</td>
                                         <td>{{$card->truck->passengers_number}}</td>
-                                        <td>{{$card->truck->gross_weight}}</td>
-                                        <td>{{$card->truck->empty_weight}}</td>
                                         <td>{{$card->truck->load}}</td>
                                         <td>{{$card->truck->kilometer_number}}</td>
-                                        <td>{{$card->truck->technical_status}}</td>
-                                        <td>{{$card->truck->legal_status}}</td>
                                         <td>
-                                            <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="" id="destroy" title="حذف" class="btn btn-danger btn-sm delete-driver" data-id="">
-                                                <i class="fa fa-trash"></i>
+                                            <a id="modal" type="button" data-toggle="modal" title="عرض" data-target="#exampleModal" href="{{route('cards.show',$card->id)}}" class="btn btn-success btn-sm">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         </td>
                                     </tr>

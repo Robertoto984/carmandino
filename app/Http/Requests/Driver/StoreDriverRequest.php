@@ -13,7 +13,7 @@ class StoreDriverRequest extends FormRequest
 
     public function rules()
     {
-         return [
+        return [
             'first_name.*' => 'required|string',
             'last_name.*' => 'required|string',
             'birth_date.*' => 'required',
@@ -21,7 +21,10 @@ class StoreDriverRequest extends FormRequest
             'address.*' => 'required|string',
             'license_type.*' => 'required',
             'license_expiration_date.*' => 'required',
-         ];
+            'truck_id.*' => 'nullable',
+            'receipt_date' => 'nullable',
+            'deliver_date' => 'nullable',
+        ];
     }
 
     public function messages()
@@ -36,7 +39,7 @@ class StoreDriverRequest extends FormRequest
             'license_expiration_date.*.required' => 'تاريخ انتهاء الشهادة مطلوب',
 
             'birth_date.*.date_format' => 'يجب أن يكون تاريخ الميلاد بالصيغة يوم/شهر/سنة',
-            'license_expiration_date.*.required'=>' تاريخ انتهاء الشهادة مطلوب',
+            'license_expiration_date.*.required' => ' تاريخ انتهاء الشهادة مطلوب',
             'license_expiration_date.*.date_format' => 'يجب أن يكون تاريخ انتهاء الشهادة بالصيغة يوم/شهر/سنة',
 
         ];

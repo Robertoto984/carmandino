@@ -4,14 +4,14 @@
     <div id="vehicle-forms-container">
         <div class="vehicle-form">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group mb-3">
                         <label for="number">الرقم</label>
                         <input type="text" name="number[]" value="{{ $row->number }}" id="number" class="form-control" readonly>
                         <span class="text-danger" id="number-error"></span>
                     </div>
                 </div>
-                <div class="form-group col-md-4 mb-3">
+                <div class="form-group col-md-3 mb-3">
                     <label for="date">التاريخ</label>
                     <div class="input-group">
                         <input type="date" name="date[]" class="form-control" id="date[]"  value="{{$row->date}}">
@@ -24,14 +24,27 @@
                         <span class="text-danger" id="date-error"></span>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group mb-3">
-                        <label for="task_start_time">توقيت البدء</label>
-                        <input type="time" name="task_start_time[]" value="{{ $row->task_start_time }}" id="task_start_time" class="form-control">
-                        <span class="text-danger" id="task_start_time-error"></span>
+                        <label for="responsible">الجهة المسؤولة</label>
+                        <input type="text" name="responsible[]" value="{{ $row->responsible }}" id="responsible" class="form-control">
+                        <span class="text-danger" id="responsible-error"></span>
                     </div>
                 </div>
-            </div>                            
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="truck_id">رقم السيارة</label>
+                        <select name="truck_id[]" id="truck_id"   class="form-control" >
+                            <option value="" disabled></option>
+                          @foreach ($trucks as $truck)
+                          <option value="{{ $truck->id }}" {{ $truck->id == $row->truck_id ? 'selected':'' }}>{{ $truck->plate_number }}</option>
+                          @endforeach
+                          </select>
+                        <span class="text-danger" id="truck_id-error"></span>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="form-group col-md-4 mb-3">
                     <label for="driver_id">السائق</label>
@@ -43,19 +56,21 @@
                     </select>
                     <span class="text-danger" id="driver_id-error"></span>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group mb-3">
-                        <label for="truck_id">رقم السيارة</label>
-                        <select name="truck_id[]" id="truck_id"   class="form-control" >
-                            <option value="" disabled></option>
-                          @foreach ($trucks as $truck)
-                          <option value="{{ $truck->id }}" {{ $truck->id == $row->truck_id ? 'selected':'' }}>{{ $truck->plate_number }}</option>
-                          @endforeach
-                          </select>
-                          
-
-                        <span class="text-danger" id="truck_id-error"></span>
-                    </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="escort_id">المرافق</label>
+                    <select class="filter-form  form-control" id="escort_id" name="escort_id[]" multiple>
+                        <?php $ids=[];
+                            foreach ($row->escort as $escort) {
+                                
+                                array_push($ids,$escort->id);
+                            }
+                        ?>
+                        <option value="" disabled></option>
+                        @foreach($escorts as $escort)
+                            <option value="{{ $escort->id }}"  {{ in_array($escort->id,$ids) ? 'selected':'' }}>{{ $escort->first_name . ' '.  $escort->last_name }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger" id="escort_id-error"></span>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
@@ -64,7 +79,33 @@
                         <span class="text-danger" id="destination-error"></span>
                     </div>
                 </div>
-            </div>                            
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="command_time">توقيت أمر المهمة</label>
+                        <input type="time" name="command_time[]" id="command_time" value="{{ $row->command_time }}" readonly
+                                class="task_start_time form-control">
+                        <span class="text-danger" id="command_time-error"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="task_start_time">توقيت البدء</label>
+                        <input type="time" name="task_start_time[]" value="{{ $row->task_start_time }}" id="task_start_time" class="form-control">
+                        <span class="text-danger" id="task_start_time-error"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="task_end_time">توقيت الانتهاء</label>
+                        <input type="time" name="task_end_time[]" value="{{ $row->task_end_time }}" id="task_end_time" class="form-control">
+                        <span class="text-danger" id="task_end_time-error"></span>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group mb-3">
@@ -88,38 +129,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-            <div class="col-md-4">
-                <div class="form-group mb-3">
-                    <label for="responsible">الجهة المسؤولة</label>
-                    <input type="text" name="responsible[]" value="{{ $row->responsible }}" id="responsible" class="form-control">
-                    <span class="text-danger" id="responsible-error"></span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group mb-3">
-                    <label for="task_end_time">توقيت الانتهاء</label>
-                    <input type="time" name="task_end_time[]" value="{{ $row->task_end_time }}" id="task_end_time" class="form-control">
-                    <span class="text-danger" id="task_end_time-error"></span>
-                </div>
-            </div>
-            <div class="form-group col-md-4 mb-3">
-                <label for="escort_id">المرافق</label>
-                <select class="filter-form  form-control" id="escort_id" name="escort_id[]" multiple>
-                    <?php $ids=[];
-                        foreach ($row->escort as $escort) {
-                            
-                            array_push($ids,$escort->id);
-                        }
-                     ?>
-                    <option value="" disabled></option>
-                    @foreach($escorts as $escort)
-                        <option value="{{ $escort->id }}"  {{ in_array($escort->id,$ids) ? 'selected':'' }}>{{ $escort->first_name . ' '.  $escort->last_name }}</option>
-                    @endforeach
-                </select>
-                <span class="text-danger" id="escort_id-error"></span>
-            </div>
-            </div>
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
@@ -142,7 +152,7 @@
                 <button type="submit" class="btn btn-success rounded-btn">حفظ</button>
             </div>
         </div>
-    </div>
+    </div>    
 </form>
 
 <script>

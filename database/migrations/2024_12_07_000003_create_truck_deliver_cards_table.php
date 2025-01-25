@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('truck_deliver_cards', function (Blueprint $table) {
             $table->id();
+            $table->string('number');
             $table->string('type');
             $table->string('manufacturer');
             $table->year('year');

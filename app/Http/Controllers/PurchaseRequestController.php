@@ -11,6 +11,8 @@ use App\Services\PurchaseRequest\StorePurchaseRequestService;
 use App\Services\PurchaseRequest\UpdatePurchaseRequestService;
 use App\Http\Requests\PurchaseRequest\StorePurchaseOrderRequest;
 use App\Http\Requests\PurchaseRequest\UpdatePurchaseOrderRequest;
+use App\Models\Product;
+use App\Models\Supplier;
 
 class PurchaseRequestController extends Controller
 {
@@ -36,8 +38,10 @@ class PurchaseRequestController extends Controller
     public function create()
     {
         $number = $this->generatePurchaseRequestNumber();
+        $products = Product::select('id', 'code', 'name')->get();
+        $suppliers = Supplier::select('id', 'trade_name')->get();
 
-        return view('purchase_requests.create', \compact('number'));
+        return view('purchase_requests.create', \compact('number', 'products', 'suppliers'));
     }
 
     public function store(StorePurchaseOrderRequest $request)

@@ -13,10 +13,16 @@ return new class extends Migration
             $table->string('number');
             $table->enum('type', \App\Enums\MaintenanceTypes::values());
             $table->date('date');
+            $table->string('reference')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->float('total');
             $table->string('notes')->nullable();
             $table->string('created_by');
             $table->string('odometer_number');
+            $table->time('time');
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->foreignId('truck_id')->constrained();
             $table->foreignId('driver_id')->constrained();
             $table->timestamps();

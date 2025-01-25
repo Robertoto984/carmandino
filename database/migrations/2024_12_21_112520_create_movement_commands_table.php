@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('initial_odometer_number')->nullable();
             $table->integer('final_odometer_number')->nullable();
             $table->integer('distance')->nullable();
+            $table->time('command_time');
             $table->time('task_start_time');
             $table->time('task_end_time')->nullable();
             $table->text('notes')->nullable();

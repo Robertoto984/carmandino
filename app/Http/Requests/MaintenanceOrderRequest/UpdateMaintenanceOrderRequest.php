@@ -16,6 +16,12 @@ class UpdateMaintenanceOrderRequest extends FormRequest
         return [
             'number' => 'required',
             'date' => 'required',
+            'start_date' => 'nullable',
+            'end_date' => 'nullable',
+            'time' => 'required',
+            'start_time' => 'nullable',
+            'end_time' => 'nullable',
+            'reference' => 'nullable',
             'type' => 'required|string',
             'created_by' => 'nullable',
             'truck_id' => 'required',

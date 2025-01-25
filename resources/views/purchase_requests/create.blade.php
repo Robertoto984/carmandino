@@ -66,10 +66,25 @@
                                         <input class="form-control" id="procedure_number" name="[]" value="1" placeholder="الرقم" autocomplete="true">
                                         <span class="text-danger" id="-error"></span>
                                     </div>
-                                    <div class="col-md-2 form-group">
-                                        <input type="text" name="required_parts[]" placeholder="القطعة المطلوبة" id="required_parts" class="form-control">
-                                        <span class="text-danger" id="required_parts-error"></span>
+                                    <div class="form-group col-md-2 mb-3">
+                                        <select class=" form-control" id="product_id" name="product_id[]">
+                                            <option value="" disabled selected>اختر المادة</option>
+                                            @foreach($products as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="text-danger" id="product_id-error"></span>
                                     </div>
+                                    {{-- <div class="form-group col-md-2 mb-3">
+                                        <select class="form-control" id="product_id" name="product_id[]">
+                                            <option value="" disabled selected>اختر المادة</option>
+                                            @foreach($products as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                            <option value="new_product" id="add-new-product-option">إضافة مادة جديدة</option>
+                                        </select>
+                                        <span class="text-danger" id="product_id-error"></span>
+                                    </div> --}}
                                     <div class="form-group col-md-1 ">
                                         <input class="form-control" id="quantity" name="quantity[]" placeholder="الكمية" autocomplete="true">
 
@@ -140,8 +155,96 @@
     </div>
 </div>
 
+{{-- <div class="modal fade" id="newProductModal" tabindex="-1" aria-labelledby="newProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newProductModalLabel">إضافة مادة جديدة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('products.store') }}" id="new-product-form">
+                    @csrf
+                    <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="code">الرمز</label>
+                                <input type="text" name="code[]" id="code" class="form-control">
+                                <span class="text-danger" id="code-error"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="name">الاسم</label>
+                                <input type="text" name="name[]" id="name" class="form-control">
+                                <span class="text-danger" id="name-error"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="qty">الكمية</label>
+                                <input type="number" name="qty[]" id="qty" class="form-control">
+                                <span class="text-danger" id="qty-error"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="price">السعر</label>
+                                <input type="number" name="price[]" id="price" class="form-control">
+                                <span class="text-danger" id="price-error"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="prod_date">تاريخ الإنتاج</label>
+                                <input type="date" name="prod_date[]" id="prod_date" class="form-control">
+                                <span class="text-danger" id="prod_date-error"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="exp_date">تاريخ الانتهاء</label>
+                                <input type="date" name="exp_date[]" id="exp_date" class="form-control">
+                                <span class="text-danger" id="exp_date-error"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="supplier_id">المورّد</label>
+                                <select class="form-control" id="supplier_id" name="supplier_id[]">
+                                    <option value="" disabled selected>اختر المورّد</option>
+                                    @foreach($suppliers as $supp)
+                                        <option value="{{ $supp->id }}">{{ $supp->trade_name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger" id="supplier_id-error"></span>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="origin_country">بلد المنشأ</label>
+                                <input type="text" name="origin_country[]" id="origin_country" class="form-control">
+                                <span class="text-danger" id="origin_country-error"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="notes">ملاحظات</label>
+                                    <textarea class="form-control" id="notes" name="notes[]" rows="4"></textarea>
+                                    <span class="text-danger" id="notes-error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    <button type="submit" class="btn btn-success">حفظ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
 @endsection
 
 @section('scripts')
 <script src="{{ asset('js/form-repeater.js') }}"></script>
+
+{{-- <script>
+document.getElementById('product_id').addEventListener('change', function(event) {
+    if (event.target.value === 'new_product') {
+        // Open the modal for adding a new product
+        $('#newProductModal').modal('show');
+    }
+});
+</script> --}}
 @endsection

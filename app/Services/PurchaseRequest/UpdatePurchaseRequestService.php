@@ -32,14 +32,14 @@ class UpdatePurchaseRequestService
                 'notes' => $orders['notes'],
             ]);
 
-            if (isset($orders['required_parts']) && is_array($orders['required_parts'])) {
+            if (isset($orders['product_id']) && is_array($orders['product_id'])) {
                 DB::table('purchase_request_product')->where('request_id', $purchaseRequest->id)->delete();
-                foreach ($orders['required_parts'] as $k => $prod) {
+                foreach ($orders['product_id'] as $k => $prod) {
                     $total_price = $orders['quantity'][$k] * $orders['price'][$k];
 
                     DB::table('purchase_request_product')->insert([
                         'request_id' => $purchaseRequest->id,
-                        'required_parts' => $prod,
+                        'product_id' => $prod,
                         'quantity' => $orders['quantity'][$k],
                         'price' => $orders['price'][$k],
                         'description' => $orders['description'][$k],

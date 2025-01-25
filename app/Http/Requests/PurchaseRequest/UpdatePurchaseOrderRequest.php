@@ -18,9 +18,9 @@ class UpdatePurchaseOrderRequest extends FormRequest
             'date' => 'required',
             'reference' => 'required',
             'responsible' => 'required',
-            'purchase_justifications' => 'required',
+            'purchase_justifications' => 'nullable',
             'total' => 'nullable',
-            'required_parts' => 'required',
+            'product_id' => 'required',
             'quantity' => 'required',
             'price' => 'nullable',
             'description' => 'nullable',
@@ -37,8 +37,7 @@ class UpdatePurchaseOrderRequest extends FormRequest
             'date.required' => ' حقل التاريخ مطلوب',
             'responsible.required' => ' حقل الجهة الطالبة مطلوب',
             'reference.required' => ' حقل المرجع مطلوب',
-            'purchase_justifications.required' => ' حقل مبررات الشراء مطلوب',
-            'required_parts.required' => ' حقل القطع المطلوبة مطلوب',
+            'product_id.required' => ' حقل القطع المطلوبة مطلوب',
             'quantity.required' => ' حقل الكمية مطلوب',
         ];
     }

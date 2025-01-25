@@ -14,6 +14,7 @@ class StoreDeliverCardRequest extends FormRequest
     public function rules()
     {
         return [
+            'number' => 'required',
             'type' => 'required|string|max:255',
             'manufacturer' => 'required|string|max:255',
             'plate_number' => 'required|string|max:255',

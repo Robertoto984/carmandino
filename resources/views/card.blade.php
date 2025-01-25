@@ -16,6 +16,9 @@
                     <a href="{{route('trucks.index')}}" style="color: #fff">
                         <h2 class="card-text">قائمة المركبات </h2>
                     </a>
+                    <a href="{{route('cards.index')}}" style="color:#fff">
+                        <h2 class="card-text">بطاقة تسليم المركبات</h2>
+                    </a>
                     <a href="{{route('trucks.create')}}" style="color:#fff">
                         <h2 class="card-text">بطاقة مركبة</h2>
                     </a>
@@ -112,17 +115,17 @@
                     <i class="fe fe-users fe-16"></i>
 
                
-                    <h1>العملاء</h1>
+                    <h1>المستخدمين</h1>
                     <h1>{{ \App\Models\User::count() }}</h1>
 
                 </div>
                 <div class="back d-flex justify-content-center flex-column align-items-center"
                     style="">
                     <a href="{{route('users.index')}}" style="color: #fff">
-                        <h2 class="card-text">قائمة العملاء </h2>
+                        <h2 class="card-text">قائمة المستخدمين </h2>
                     </a>
                     <a href="{{route('users.create')}}" style="color:#fff">
-                        <h2 class="card-text">بطاقة عميل</h2>
+                        <h2 class="card-text">بطاقة مستخدم</h2>
                     </a>
                 </div>
             </div>

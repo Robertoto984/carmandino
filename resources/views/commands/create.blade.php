@@ -64,12 +64,10 @@
                                     <select name="truck_id[]" id="truck_id"
                                         class=" form-control" >
                                         <option value="" disabled selected></option>
-
                                         @foreach ($trucks as $truck)
                                         <option value="{{ $truck->id }}" @if(request('truck_id')){{  $truck->id == request('truck_id') ? 'selected':'' }}@endif>{{ $truck->plate_number }}</option>
                                         @endforeach
                                     </select>
-
                                     <span class="text-danger" id="truck_id-error"></span>
                                 </div>
                             </div>
@@ -79,7 +77,6 @@
                                 <label for="driver_id">السائق</label>
                                 <select class=" form-control" id="driver_id" name="driver_id[]">
                                     <option value="" disabled selected></option>
-
                                     @foreach($drivers as $driver)
                                     <option value="{{ $driver->id }}">{{ $driver->first_name . ' '. $driver->last_name
                                         }}</option>
@@ -110,7 +107,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="command_time">توقيت أمر المهمة</label>
+                                    <input type="time" name="command_time[]" id="command_time" value="{{ date("H:i") }}"
+                                         class="task_start_time form-control">
+                                    <span class="text-danger" id="command_time-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="task_start_time">توقيت البدء</label>
                                     <input type="time" name="task_start_time[]" id="task_start_time" value="{{ date("H:i") }}"
@@ -118,14 +123,14 @@
                                     <span class="text-danger" id="task_start_time-error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="task_end_time">توقيت الانتهاء</label>
                                     <input type="time" name="task_end_time[]" id="task_end_time" class="form-control">
                                     <span class="text-danger" id="task_end_time-error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="initial_odometer_number">العداد عند البدء</label>
                                     <input type="number" value="{{(float)(Request::get('kilometer_number')) ?? ''}}" name="initial_odometer_number[]" id="initial_odometer_number"
@@ -133,7 +138,7 @@
                                     <span class="text-danger" id="initial_odometer_number-error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="final_odometer_number">العداد عند الانتهاء</label>
 
@@ -143,7 +148,7 @@
                                     <span class="text-danger" id="final_odometer_number-error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="distance">المسافة المقطوعة</label>
                                     <input type="number" name="distance[]" id="distance" value=""
@@ -204,4 +209,17 @@
         })
     
 </script>
+<script>
+    $(document).on('change', '#truck_id', function() {
+        let truckId = $(this).val();
+        let selectedTruck = @json($trucks).find(truck => truck.id == truckId);
+        if (selectedTruck) {
+            $(this).closest('.vehicle-form').find('#initial_odometer_number').val(selectedTruck.kilometer_number);
+        } else {
+            $(this).closest('.vehicle-form').find('#initial_odometer_number').val('');
+        }
+    });
+</script>
+
+
 @endsection

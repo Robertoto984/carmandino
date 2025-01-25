@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\LicenseTypes;
-use App\Exports\DriversExport;
-use App\Http\Requests\Driver\StoreDriverRequest;
-use App\Http\Requests\Driver\updateDriverRequest;
-use App\Imports\DriversImport;
+use App\Models\Truck;
 use App\Models\Driver;
+use App\Enums\LicenseTypes;
+use Illuminate\Http\Request;
+use App\Exports\DriversExport;
+use App\Imports\DriversImport;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Services\Driver\StoreDriverService;
 use App\Services\Driver\UpdateDriverService;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Services\Card\StoreDeliverCardService;
+use App\Http\Requests\Driver\StoreDriverRequest;
+use App\Http\Requests\Driver\updateDriverRequest;
 
 class DriversController extends Controller
 {
     protected $storeDriverService;
     protected $updateDriverService;
 
-    public function __construct(StoreDriverService $storeDriverService,UpdateDriverService $updateDriverService)
-    {
+    public function __construct(
+        StoreDriverService $storeDriverService,
+        UpdateDriverService $updateDriverService,
+
+    ) {
         $this->storeDriverService = $storeDriverService;
         $this->updateDriverService = $updateDriverService;
-
     }
 
     public function index()
@@ -41,8 +46,10 @@ class DriversController extends Controller
             abort(403);
         }
         $LicenseTypes = LicenseTypes::values();
+        $trucks = Truck::select('id', 'plate_number')->get();
 
-        return view('drivers.create', compact('LicenseTypes'));
+
+        return view('drivers.create', compact('LicenseTypes', 'trucks'));
     }
 
     public function edit($id)
@@ -76,14 +83,12 @@ class DriversController extends Controller
                 'message' => 'تم إضافة السائقين بنجاح.',
                 'redirect' => route('drivers.index'),
             ]);
-
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             return response()->json([
                 'message' => 'حدث خطأ أثناء إضافة المرافق.',
-                'error' => $e->getMessage(),
                 'redirect' => route('drivers.index'),
             ], 500);
-
         }
     }
 
@@ -103,7 +108,6 @@ class DriversController extends Controller
             ]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'حدث خطأ أثناء تعديل السائق:', 'redirect' => route('drivers.index')]);
-
         }
     }
 
@@ -120,7 +124,6 @@ class DriversController extends Controller
             Driver::where('id', $id)->delete();
             return response()
                 ->json(['message' => 'تم حذف السائق بنجاح', 'redirect' => route('drivers.index')]);
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -136,7 +139,6 @@ class DriversController extends Controller
             Driver::whereIn('id', (array) $request['ids'])->delete();
             return response()
                 ->json(['message' => 'تم حذف السائق بنجاح', 'redirect' => route('drivers.index')]);
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

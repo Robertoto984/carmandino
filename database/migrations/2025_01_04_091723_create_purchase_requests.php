@@ -14,7 +14,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('reference');
             $table->string('responsible');
-            $table->string('purchase_justifications');
+            $table->string('purchase_justifications')->nullable();
             $table->string('notes')->nullable();
             $table->float('total')->nullable();
             $table->timestamps();

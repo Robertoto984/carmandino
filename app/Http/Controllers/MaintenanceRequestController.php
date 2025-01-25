@@ -50,7 +50,7 @@ class MaintenanceRequestController extends Controller
             abort(403);
         }
 
-        $trucks = Truck::select('id', 'plate_number')->get();
+        $trucks = Truck::select('id', 'plate_number', 'kilometer_number')->get();
         $drivers = Driver::select('first_name', 'last_name', 'id')->get();
         $order_types = MaintenanceTypes::values();
         $products = Product::select('id', 'code', 'name', 'price')->get();
@@ -72,9 +72,10 @@ class MaintenanceRequestController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Log::error('Stack trace: ' . $e->getTraceAsString());
+            Log::error('Stack trace: ' . $e->getLine());
             return response()->json([
                 'message' => 'حدث خطأ أثناء إضافة الطلب:',
-                'redirect' => route('maintenance_orders.index')
+                // 'redirect' => route('maintenance_orders.index')
             ]);
         }
     }
@@ -142,7 +143,9 @@ class MaintenanceRequestController extends Controller
             if (request()->user()->cannot('update', $m)) {
                 abort(403);
             }
+            Log::info(['request', $request->all()]);
             $data = $request->validated();
+            Log::info(['validated request', $data]);
             $this->updateMaintenanceRequest->update($data, $id);
             return response()->json([
                 'message' => 'تم تعديل الطلب بنجاح.',

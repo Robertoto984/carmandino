@@ -24,12 +24,12 @@ class StorePurchaseRequestService
                 ]);
             }
 
-            if (isset($orders['required_parts']) && is_array($orders['required_parts'])) {
-                foreach ($orders['required_parts'] as $prod) {
+            if (isset($orders['product_id']) && is_array($orders['product_id'])) {
+                foreach ($orders['product_id'] as $prod) {
                     $total_price = $orders['quantity'][$key] * $orders['price'][$key];
                     DB::table('purchase_request_product')->insert([
                         'request_id' => $row->id,
-                        'required_parts' => $orders['required_parts'][$key],
+                        'product_id' => $orders['product_id'][$key],
                         'quantity' => $orders['quantity'][$key],
                         'price' => $orders['price'][$key],
                         'total_price' => $total_price,

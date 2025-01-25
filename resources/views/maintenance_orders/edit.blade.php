@@ -3,7 +3,7 @@
     <div id="vehicle-forms-container">
         <div class="vehicle-form">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group mb-3">
                         <label for="number">الرقم</label>
                         <input type="text" name="number" id="number" class="form-control number"
@@ -11,10 +11,10 @@
                         <span class="text-danger" id="number-error"></span>
                     </div>
                 </div>
-                <div class="form-group col-md-4 mb-3">
+                <div class="form-group col-md-3 mb-3">
                     <label for="date">التاريخ</label>
                     <div class="input-group">
-                        <input type="date" name="date" class="date form-control" value="{{ old('date', $row->date) }}">
+                        <input type="date" name="date" class="date form-control" value="{{ old('date', $row->date) }}" readonly>
                         <div class="input-group-append">
                             <div class="input-group-text" id="button-addon-date">
                                 <span class="fe fe-calendar fe-16"></span>
@@ -23,7 +23,15 @@
                         <span class="text-danger" id="date-error"></span>
                     </div>
                 </div>
-                <div class="form-group col-md-4 mb-3">
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="time">توقيت الطلب</label>
+                        <input type="time" name="time" id="time" value="{{ old('time', $row->time) }}" readonly
+                                class="task_start_time form-control">
+                        <span class="text-danger" id="time-error"></span>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 mb-3">
                     <label for="type">نوع الصيانة</label>
                     <select class="form-control" id="type" name="type">
                         <option value="" disabled selected>اختر النوع</option>
@@ -32,6 +40,50 @@
                         @endforeach
                     </select>
                     <span class="text-danger" id="type-error"></span>
+                </div>
+                <div class="form-group col-md-3 mb-3">
+                    <label for="start_date">تاريخ البدء</label>
+                    <div class="input-group">
+                        <input type="date" name="start_date" class="date form-control"
+                            value="{{ old('start_date', $row->start_date) }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text" id="button-addon-date">
+                                <span class="fe fe-calendar fe-16">
+                                </span>
+                            </div>
+                        </div>
+                        <span class="text-danger" id="start_date-error"></span>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 mb-3">
+                    <label for="end_date">تاريخ الانتهاء</label>
+                    <div class="input-group">
+                        <input type="date" name="end_date" class="date form-control"
+                            value="{{ old('end_date', $row->end_date) }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text" id="button-addon-date">
+                                <span class="fe fe-calendar fe-16">
+                                </span>
+                            </div>
+                        </div>
+                        <span class="text-danger" id="end_date-error"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="start_time">توقيت البدء</label>
+                        <input type="time" name="start_time" id="start_time" value="{{ old('start_time', $row->start_time) }}"
+                                class="task_start_time form-control">
+                        <span class="text-danger" id="start_time-error"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group mb-3">
+                        <label for="end_time">توقيت الانتهاء</label>
+                        <input type="time" name="end_time" id="end_time" value="{{ old('end_time', $row->end_time) }}"
+                                class="task_start_time form-control">
+                        <span class="text-danger" id="end_time-error"></span>
+                    </div>
                 </div>
             </div>
 
@@ -141,16 +193,21 @@
                 <i class="fa fa-plus"></i>
             </a>
             <div class="row">
-                <div class="form-group col-md-6 mb-3">
-                    <label for="notes">الملاحظات</label>
-                    <textarea class="form-control" id="notes" name="notes"
-                        rows="4">{{ old('notes', $row->notes) }}</textarea>
-                    <span class="text-danger" id="notes-error"></span>
+                <div class="col-md-6 form-group">
+                    <label for="reference">المرجع</label>
+                    <input type="text" name="reference" id="reference" class="form-control">
+                    <span class="text-danger" id="reference-error"></span>
                 </div>
                 <div class="form-group col-md-6 mb-3">
                     <label for="total">الإجمالي</label>
                     <input class="form-control" id="total" name="total" value="{{ old('total', $row->total) }}">
                     <span class="text-danger" id="total-error"></span>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="notes">الملاحظات</label>
+                    <textarea class="form-control" id="notes" name="notes"
+                        rows="4" readonly>{{ old('notes', $row->notes) }}</textarea>
+                    <span class="text-danger" id="notes-error"></span>
                 </div>
             </div>
 
@@ -163,3 +220,5 @@
 </form>
 
 <script src="{{ asset('js/form-repeater.js') }}"></script>
+
+

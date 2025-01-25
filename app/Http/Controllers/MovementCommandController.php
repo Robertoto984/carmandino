@@ -48,7 +48,7 @@ class MovementCommandController extends Controller
         if (request()->user()->cannot('create', MovementCommand::class)) {
             abort(403);
         }
-        $trucks = Truck::select('id', 'plate_number')->get();
+        $trucks = Truck::select('id', 'plate_number', 'kilometer_number')->get();
         $escorts = Escort::select('first_name', 'last_name', 'id')->get();
         $drivers = Driver::select('first_name', 'last_name', 'id')->get();
         $number = $this->generateCustomNumber();
@@ -80,6 +80,23 @@ class MovementCommandController extends Controller
                 'redirect' => route('commands.index')
             ], 500);
         }
+    }
+
+    public function show($id)
+    {
+        $trucks = Truck::select('id', 'plate_number')->get();
+        $escorts = Escort::select('first_name', 'last_name', 'id')->get();
+        $drivers = Driver::select('first_name', 'last_name', 'id')->get();
+        $row = MovementCommand::with('escort')->where('id', $id)->first();
+        return response()->json([
+            'html' => view('commands.show', [
+                'row' => $row,
+                'trucks' => $trucks,
+                'escorts' => $escorts,
+                'drivers' => $drivers
+            ])->render(),
+            'row' => $row
+        ]);
     }
 
     public function edit($id)

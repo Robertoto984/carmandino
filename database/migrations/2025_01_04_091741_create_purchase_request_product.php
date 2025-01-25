@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('purchase_request_product', function (Blueprint $table) {
             $table->id();
             $table->foreignId('request_id')->on('purchase_request')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
-            $table->string('required_parts');
+            $table->foreignId('product_id')->on('products')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
             $table->float('quantity');
             $table->float('price')->nullable();
             $table->string('description')->nullable();

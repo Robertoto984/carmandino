@@ -44,6 +44,7 @@ Route::group(['middleware' => 'redirect'], function () {
 
     Route::prefix('cards')->controller(CardsController::class)->group(function () {
         Route::get('index', 'index')->name('cards.index');
+        Route::get('show/{id}', 'show')->name('cards.show');
         Route::get('create/{id}', 'create')->name('trucks.create-deliver-order');
         Route::post('store', 'store')->name('trucks.store-deliver-order');
     });
@@ -108,6 +109,7 @@ Route::group(['middleware' => 'redirect'], function () {
         Route::get('create', 'create')->name('commands.create');
         Route::post('store', 'store')->name('commands.store');
         Route::get('edit/{id}', 'edit')->name('commands.edit');
+        Route::get('show/{id}', 'show')->name('commands.show');
         Route::post('update/{id}', 'update')->name('commands.update');
         Route::get('finish/{id}', 'finish')->name('commands.finish');
         Route::post('complete/{id}', 'complete')->name('commands.complete');

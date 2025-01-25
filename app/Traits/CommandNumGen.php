@@ -8,6 +8,7 @@ use App\Models\MovementCommand;
 use App\Models\MaintenanceOrder;
 use App\Models\MaintenanceRequest;
 use App\Models\PurchaseRequest;
+use App\Models\TruckDeliverCard;
 use Illuminate\Support\Facades\Log;
 
 trait CommandNumGen
@@ -94,6 +95,27 @@ trait CommandNumGen
         }
 
         $newNumber = 'pr' . $date . sprintf('%04d', $increment);
+
+        return $newNumber;
+    }
+
+    public function generateCardDeliverNumber()
+    {
+        $date = Carbon::now()->format('dmy');
+        $lastCommand = TruckDeliverCard::where('number', 'like', 'dc' . $date . '%')
+            ->orderBy('number', 'desc')
+            ->first();
+
+        $increment = 1;
+        if ($lastCommand) {
+            $lastNumber = substr($lastCommand->number, 8);
+
+            if (is_numeric($lastNumber)) {
+                $increment = (int)$lastNumber + 1;
+            }
+        }
+
+        $newNumber = 'dc' . $date . sprintf('%04d', $increment);
 
         return $newNumber;
     }

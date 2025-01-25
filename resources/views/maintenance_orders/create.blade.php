@@ -28,7 +28,7 @@
                 <div id="vehicle-forms-container">
                     <div class="vehicle-form">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="number">الرقم</label>
                                     <input type="text" name="number[]" id="number" class="form-control number" value="{{$number}}"
@@ -36,7 +36,7 @@
                                     <span class="text-danger" id="number-error"></span>
                                 </div>
                             </div>
-                            <div class="form-group col-md-4 mb-3">
+                            <div class="form-group col-md-3 mb-3">
                                 <label for="date">التاريخ</label>
                                 <div class="input-group">
                                     <input type="date" name="date[]" class="date form-control"
@@ -50,7 +50,15 @@
                                     <span class="text-danger" id="date-error"></span>
                                 </div>
                             </div>
-                            <div class="form-group col-md-4 mb-3">
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label for="time">توقيت الطلب</label>
+                                    <input type="time" name="time[]" id="time" value="{{ date("H:i") }}"
+                                         class="task_start_time form-control">
+                                    <span class="text-danger" id="time-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3 mb-3">
                                 <label for="type">نوع الصيانة</label>
                                 <select class=" form-control" id="type" name="type[]">
                                     <option value="" disabled selected>اختر النوع</option>
@@ -59,6 +67,50 @@
                                     @endforeach
                                 </select>
                                 <span class="text-danger" id="type-error"></span>
+                            </div>
+                            <div class="form-group col-md-3 mb-3">
+                                <label for="start_date">تاريخ البدء</label>
+                                <div class="input-group">
+                                    <input type="date" name="start_date[]" class="date form-control"
+                                        >
+                                    <div class="input-group-append">
+                                        <div class="input-group-text" id="button-addon-date">
+                                            <span class="fe fe-calendar fe-16">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="text-danger" id="start_date-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3 mb-3">
+                                <label for="end_date">تاريخ الانتهاء</label>
+                                <div class="input-group">
+                                    <input type="date" name="end_date[]" class="date form-control"
+                                        >
+                                    <div class="input-group-append">
+                                        <div class="input-group-text" id="button-addon-date">
+                                            <span class="fe fe-calendar fe-16">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="text-danger" id="end_date-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label for="start_time">توقيت البدء</label>
+                                    <input type="time" name="start_time[]" id="start_time" 
+                                         class="task_start_time form-control">
+                                    <span class="text-danger" id="start_time-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label for="end_time">توقيت الانتهاء</label>
+                                    <input type="time" name="end_time[]" id="end_time" 
+                                         class="task_start_time form-control">
+                                    <span class="text-danger" id="end_time-error"></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -75,9 +127,8 @@
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="truck_id">رقم السيارة</label>
-                                    <select name="truck_id[]" id="truck_id"  class=" show-tick form-control"
-                                        >
-                                        <option value="" disabled>اختر السيارة</option>
+                                    <select name="truck_id[]" id="truck_id"  class=" show-tick form-control">
+                                        <option value="" disabled selected>اختر السيارة</option>
                                         @foreach ($trucks as $truck)
                                         <option value="{{ $truck->id }}"> {{ $truck->plate_number }}</option>
                                         @endforeach
@@ -151,19 +202,23 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-6 mb-3">
-                                <label for="parts_description">الملاحظات</label>
-                                <textarea class="form-control" id="notes" name="notes[]" rows="4"></textarea>
-                                <span class="text-danger" id="notes-error"></span>
+                            <div class="col-md-6 form-group">
+                                <label for="reference">المرجع</label>
+                                <input type="text" name="reference[]" id="reference" class="form-control">
+                                <span class="text-danger" id="reference-error"></span>
                             </div>
                             <div class="form-group col-md-6 mb-3">
                                 <label for="total">الإجمالي</label>
-                                <input type="number" class="form-control" id="total" name="total[]" />
+                                <input class="form-control" id="total" name="total[]">
                                 <span class="text-danger" id="total-error"></span>
                             </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="notes">الملاحظات</label>
+                                <textarea class="form-control" id="notes" name="notes[]"
+                                    rows="4"></textarea>
+                                <span class="text-danger" id="notes-error"></span>
+                            </div>
                         </div>
-                      
-                        
                         <div class="col mr-auto mb-5 mt-5">
                             <div class="ml-auto">
                             </div>
@@ -185,16 +240,20 @@
     </div>
 </div>
 
-
-<!-- Multi-Select Dropdown -->
-
-
-
-
-
 @endsection
 
 @section('scripts')
 <script src="{{ asset('js/form-repeater.js') }}"></script>
 
+<script>
+    $(document).on('change', '#truck_id', function() {
+        let truckId = $(this).val();
+        let selectedTruck = @json($trucks).find(truck => truck.id == truckId);
+        if (selectedTruck) {
+            $(this).closest('.vehicle-form').find('#odometer_number').val(selectedTruck.kilometer_number);
+        } else {
+            $(this).closest('.vehicle-form').find('#odometer_number').val('');
+        }
+    });
+</script>
 @endsection

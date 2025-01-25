@@ -18,6 +18,12 @@ class UpdateMaintenanceRequestService
             $maintenanceRequest->update([
                 'number' => $orders['number'],
                 'date' => $orders['date'],
+                'start_date' => $orders['start_date'],
+                'end_date' => $orders['end_date'],
+                'time' => $orders['time'],
+                'start_time' => $orders['start_time'],
+                'end_time' => $orders['end_time'],
+                'reference' => $orders['reference'],
                 'type' => $orders['type'],
                 'truck_id' => $orders['truck_id'],
                 'driver_id' => $orders['driver_id'],

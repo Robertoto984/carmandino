@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class StoreDeliverCardService
 {
-   public function store(array $data)
+    public function store(array $data)
     {
         return DB::transaction(function () use ($data) {
             $year = Carbon::createFromFormat('Y', $data['year'])->format('Y');
@@ -18,6 +18,7 @@ class StoreDeliverCardService
             $receipt_date = Carbon::createFromFormat('Y-m-d', $data['receipt_date'])->format('Y-m-d');
             $deliver_date = Carbon::createFromFormat('Y-m-d', $data['deliver_date'])->format('Y-m-d');
             return TruckDeliverCard::create([
+                'number' => $data['number'],
                 'type' => $data['type'],
                 'manufacturer' => $data['manufacturer'],
                 'plate_number' => $data['plate_number'],

@@ -22,6 +22,7 @@ class UpdateMovementCommandService
             'truck_id' => $request['truck_id'][0],
             'driver_id' => $request['driver_id'][0],
             'destination' => $request['destination'][0],
+            'command_time' => $request['command_time'][0],
             'task_start_time' => $request['task_start_time'][0],
             'task_end_time' => $request['task_end_time'][0],
             'initial_odometer_number' => $request['initial_odometer_number'][0],

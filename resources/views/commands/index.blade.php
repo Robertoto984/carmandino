@@ -63,21 +63,14 @@
                                     <th><input type="checkbox"  class="checkbox"  id='check_all'/></th>
                                     <th>#</th>
                                     <th>الرقم</th>
-                                    <th>منظم الأمر</th>
                                     <th>الحالة</th>
                                     <th>التاريخ</th>
                                     <th>الجهة الطالبة</th>
                                     <th>رقم السيارة</th>
-                                    <th>السائق</th>
-                                    <th>المرافق</th>
+                                    {{-- <th>السائق</th> --}}
                                     <th>وجهة التنقل</th>
                                     <th>المهمة</th>
                                     <th>توقيت البدء</th>
-                                    <th>توقيت الانتهاء</th>
-                                    <th>رقم العداد بداية</th>
-                                    <th>رقم العداد نهاية</th>
-                                    <th>المسافة المقطوعة</th>
-                                    <th>ملاحظات</th>
                                     <th></th>
                                     </tr>
                             </thead>
@@ -87,32 +80,23 @@
                                         <td><input type="checkbox" name="ids[]" value="{{ $command->id }}" id="check" /></td>
                                         <td>{{ $command->id }}</td>
                                         <td>{{ $command->number }}</td>
-                                        <td>{{ $command->organized_by }}</td>
                                         <td>{{ $command->status() }}</td>
                                         <td>{{ $command->date }}</td>
                                         <td>{{ $command->responsible }}</td>
                                         <td>{{ $command->truck->plate_number ?? ''}}</td>
-                                        <td>{{ $command->driver->first_name.' '. $command->driver->last_name ?? ''}}</td>
-                                        <td>
-                                            @foreach ($command->escort as $escort)
-                                            <li>   {{ $escort->first_name .' '. $escort->last_name }} </li>
-                                            <br>
-                                            @endforeach
-                                        
-                                        </td>
+                                        {{-- <td>{{ $command->driver->first_name.' '. $command->driver->last_name ?? ''}}</td> --}}
                                         <td>{{ $command->destination }}</td>
                                         <td>{{ $command->task }}</td>
-                                       
                                         <td>{{ $command->task_start_time }}</td>
-                                        <td>{{ $command->task_end_time }}</td>
-                                        <td>{{ $command->initial_odometer_number }}</td>
-                                        <td>{{ $command->final_odometer_number }}</td>
-                                        <td>{{ $command->distance }}</td>
-                                        <td>{{ $command->notes }}</td>
                                         <td>
                                             @can('complete',$command)
                                                 {!! $command->statusButton() !!}
                                             @endcan
+
+                                            <a id="modal" type="button" data-toggle="modal" title="عرض" data-target="#exampleModal" href="{{ route('commands.show',$command->id) }}" class="btn btn-success btn-sm">
+                                                <i class="fa fa-eye"></i> 
+                                            </a>
+
                                             @can('delete',$command)
 
                                             <a id="modal" type="button" data-toggle="modal" title="تعديل" data-target="#exampleModal" href="{{ route('commands.edit',$command->id) }}" class="btn btn-primary btn-sm">
